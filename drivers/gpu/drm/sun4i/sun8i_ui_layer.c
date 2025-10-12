@@ -269,10 +269,10 @@ static const uint64_t sun8i_layer_modifiers[] = {
 struct sun8i_layer *sun8i_ui_layer_init_one(struct drm_device *drm,
 					    struct sun8i_mixer *mixer,
 					    enum drm_plane_type type,
-					    int index)
+					    int index,
+					    int plane_cnt)
 {
 	struct sun8i_layer *layer;
-	unsigned int plane_cnt;
 	int ret;
 
 	layer = devm_kzalloc(drm->dev, sizeof(*layer), GFP_KERNEL);
@@ -294,8 +294,6 @@ struct sun8i_layer *sun8i_ui_layer_init_one(struct drm_device *drm,
 		dev_err(drm->dev, "Couldn't initialize layer\n");
 		return ERR_PTR(ret);
 	}
-
-	plane_cnt = mixer->cfg->ui_num + mixer->cfg->vi_num;
 
 	ret = drm_plane_create_alpha_property(&layer->plane);
 	if (ret) {

@@ -748,7 +748,8 @@
 
 &mdio0 {
 	rgmii_phy0: phy@0 {
-		compatible = "ethernet-phy-ieee802.3-c22";
+		/* Motorcomm YT8521 */
+		compatible = "ethernet-phy-id0000.011a";
 		reg = <0>;
 		interrupt-parent = <&gpio0>;
 		interrupts = <RK_PC6 IRQ_TYPE_LEVEL_LOW>;
@@ -763,7 +764,8 @@
 
 &mdio1 {
 	rgmii_phy1: phy@0 {
-		compatible = "ethernet-phy-ieee802.3-c22";
+		/* Motorcomm YT8521 */
+		compatible = "ethernet-phy-id0000.011a";
 		reg = <0>;
 		interrupt-parent = <&gpio0>;
 		interrupts = <RK_PC7 IRQ_TYPE_LEVEL_LOW>;

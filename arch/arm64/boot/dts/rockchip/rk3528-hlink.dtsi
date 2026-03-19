@@ -244,7 +244,9 @@
 		/* Realtek RTL8211F (phyid 0x001cc916) */
 		compatible = "ethernet-phy-id001c.c916";
 		reg = <0x1>;
-		realtek,led-data = <0xc160>;
+
+		realtek,led1-triggers = "link-10", "link-100", "link-1000";
+		realtek,led2-triggers = "activity";
 
 		pinctrl-names = "default";
 		pinctrl-0 = <&gmac1_reset_pin>;

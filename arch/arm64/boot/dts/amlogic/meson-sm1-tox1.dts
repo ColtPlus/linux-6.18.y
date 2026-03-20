@@ -368,10 +368,16 @@
 	dr_mode = "otg";
 };
 
+&sdio_pwrseq {
+	post-power-on-delay-ms = <200>;
+	power-off-delay-us = <10000>;
+};
+
 /* SDIO */
 &sd_emmc_a {
+	/delete-property/ sd-uhs-sdr104;
+	max-frequency = <50000000>;
 	sd-uhs-sdr12;
 	sd-uhs-sdr25;
 	sd-uhs-sdr50;
-	sd-uhs-ddr50;
 };

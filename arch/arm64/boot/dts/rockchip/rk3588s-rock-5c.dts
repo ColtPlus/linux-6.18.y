@@ -423,7 +423,8 @@
 		 * LED1 (Green):  Link 10/100/1000
 		 * LED2 (Yellow): Active 10/100/1000
 		 */
-		realtek,led-data = <0xc160>;
+		realtek,led1-triggers = "link-10", "link-100", "link-1000";
+		realtek,led2-triggers = "activity";
 
 		reset-assert-us = <20000>;
 		reset-deassert-us = <100000>;

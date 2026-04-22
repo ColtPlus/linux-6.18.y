@@ -116,6 +116,8 @@
 };
 
 &ehci1 {
+	#address-cells = <1>;
+	#size-cells = <0>;
 	status = "okay";
 
 	rtl8153: device@1 {

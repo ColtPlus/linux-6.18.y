@@ -12,7 +12,7 @@
 #include "rk3588.dtsi"
 
 / {
-	model = "seewo sv50";
+	model = "Seewo SV50";
 	compatible = "seewo,sv50", "rockchip,rk3588";
 
 	aliases {

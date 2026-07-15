@@ -1,0 +1,13 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Copyright (c) 2026 ColtPlus
+ */
+
+/dts-v1/;
+
+#include "rk3588-seewo-sv32-sv50.dtsi"
+
+/ {
+	model = "Seewo SV32";
+	compatible = "seewo,sv32", "rockchip,rk3588";
+};

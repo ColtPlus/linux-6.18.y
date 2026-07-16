@@ -687,6 +687,8 @@
 
 &u2phy0_otg {
 	vbus-supply = <&vcc5v0_otg>;
+	rockchip,typec-vbus-det;
+	rockchip,dis-u2-susphy;
 	status = "okay";
 };
 

@@ -834,28 +834,14 @@
 	};
 };
 
-&gmac0 {
-	local-mac-address = [90 e4 68 52 8e 13];
-	status = "disabled";
-	phy-mode = "rgmii-rxid";
-	clock_in_out = "output";
-	snps,reset-gpio = <&gpio4 RK_PB3 GPIO_ACTIVE_LOW>;
-	snps,reset-active-low;
-	snps,reset-delays-us = <0 20000 100000>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&gmac0_miim &gmac0_tx_bus2 &gmac0_rx_bus2 &gmac0_rgmii_clk &gmac0_rgmii_bus>;
-	tx_delay = <68>;
-	phy-handle = <&mdio0_phy>;
-};
-
 &gmac1 {
 	local-mac-address = [90 e4 68 52 8e 14];
 	status = "okay";
 	phy-mode = "rgmii";
 	clock_in_out = "output";
-	/*snps,reset-gpio = <&gpio3 RK_PB7 GPIO_ACTIVE_HIGH>;*/
-	/*snps,reset-active-high;*/
-	/*snps,reset-delays-us = <0 250000 500000>;*/
+	snps,reset-gpio = <&gpio3 RK_PB7 GPIO_ACTIVE_HIGH>;
+	snps,reset-active-high;
+	snps,reset-delays-us = <0 250000 500000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&gmac1_miim &gmac1_tx_bus2 &gmac1_rx_bus2 &gmac1_rgmii_clk &gmac1_rgmii_bus>;
 	tx_delay = <66>;
@@ -866,77 +852,47 @@
 	};
 };
 
-&mdio0 {
-	#address-cells = <1>;
-	#size-cells = <0>;
-
-	mdio0_phy: phy@1 {
-		compatible = "ethernet-phy-ieee802.3-c22";
-		reg = <1>;
-	};
-};
-
 &mdio1 {
+	compatible = "snps,dwmac-mdio";
 	#address-cells = <1>;
 	#size-cells = <0>;
-        reset-gpios = <&gpio3 RK_PB7 GPIO_ACTIVE_HIGH>;
-        reset-delay-us = <250000>;
-        reset-post-delay-us = <500000>;
 
-	gsw140: switch@1 {
+	gsw140: switch@0 {
 		compatible = "maxlinear,gsw140";
-		reg = <1>;
+		reg = <0>;
 
 		ports {
 			#address-cells = <1>;
 			#size-cells = <0>;
 
-			port@0 {
-				reg = <0>;
-				label = "lan1";
-				phy-handle = <&phy0>;
-			};
-
-			port@1 {
-				reg = <1>;
-				label = "lan2";
-				phy-handle = <&phy1>;
-			};
-
-			port@2 {
-				reg = <2>;
-				label = "lan3";
-				phy-handle = <&phy2>;
-			};
-
-			port@7 {
-				reg = <7>;
+			port@5 {
+				reg = <5>;
+				label = "cpu";
 				ethernet = <&gmac1>;
 				phy-mode = "rgmii";
-				tx-internal-delay-ps = <0>;
-				rx-internal-delay-ps = <0>;
 
 				fixed-link {
 					speed = <1000>;
 					full-duplex;
 				};
 			};
-		};
 
-		mdio {
-			#address-cells = <1>;
-			#size-cells = <0>;
-
-			phy0: ethernet-phy@0 {
+			port@0 {
 				reg = <0>;
+				label = "lan1";
+				phy-mode = "internal";
 			};
 
-			phy1: ethernet-phy@1 {
+			port@1 {
 				reg = <1>;
+				label = "lan2";
+				phy-mode = "internal";
 			};
 
-			phy2: ethernet-phy@2 {
+			port@2 {
 				reg = <2>;
+				label = "lan3";
+				phy-mode = "internal";
 			};
 		};
 	};

@@ -127,7 +127,7 @@
 		simple-audio-card,format = "i2s";
 		simple-audio-card,name = "rockchip,acm8625m";
 		simple-audio-card,mclk-fs = <256>;
-		status = "disabled";
+		status = "disab";
 
 		simple-audio-card, {
 			sound-dai = <&i2s0_8ch>;
@@ -210,7 +210,7 @@
 		};
 	};
 
-	gpio-leds {
+	/*gpio-leds {
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
 
@@ -224,7 +224,7 @@
 			gpios = <&gpio2 RK_PC0 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "alarm";
 		};
-	};
+	};*/
 };
 
 &combphy0_ps {

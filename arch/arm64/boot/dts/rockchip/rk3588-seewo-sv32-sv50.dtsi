@@ -216,13 +216,13 @@
 
 		user-led {
 			gpios = <&gpio4 RK_PC3 GPIO_ACTIVE_HIGH>;
-			linux,default-trigger = "heartbeat";
+			linux,default-trigger = "boot";
 			default-state = "on";
 		};
 
 		sys-led {
 			gpios = <&gpio2 RK_PC0 GPIO_ACTIVE_HIGH>;
-			linux,default-trigger = "boot";
+			linux,default-trigger = "alarm";
 		};
 	};
 };

@@ -6,7 +6,7 @@
 /dts-v1/;
 
 #include "rk3588-seewo-sv32-sv50.dtsi"
-
+#include "sw-ioctl-iomux.dts"
 / {
 	model = "Seewo SV50";
 	compatible = "seewo,sv50", "rockchip,rk3588";
@@ -17,12 +17,17 @@
 };
 
 &pinctrl {
-	wifi {
-		wifi_pwren: wifi-pwren {
-			rockchip,pins = <2 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-    		};
-		wifi_rst: wifi-rst {
-	  		rockchip,pins = <2 RK_PB4 RK_FUNC_GPIO &pcfg_pull_none>;
+	/*usb {
+		usb20_pwren_a: usb20-pwren-a {
+			rockchip,pins = <4 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
-	};
+
+		usb30_pwren_a: usb30-pwren-a {
+			rockchip,pins = <4 RK_PD3 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		usb30_pwren_b: usb30-pwren-b {
+			rockchip,pins = <1 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};*/
 };

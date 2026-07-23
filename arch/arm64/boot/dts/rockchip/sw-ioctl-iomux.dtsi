@@ -96,8 +96,8 @@
 				<4 RK_PB5 RK_FUNC_GPIO &pcfg_pull_none>,
 				<4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>,
 				<4 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>,
-				<4 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
-				<2 RK_PC0 RK_FUNC_GPIO &pcfg_pull_none>,
+				<4 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>,
+				<2 RK_PC0 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 };

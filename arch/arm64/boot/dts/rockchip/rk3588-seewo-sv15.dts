@@ -6,7 +6,6 @@
 /dts-v1/;
 
 #include "rk3588-seewo-sv15-sv32-sv50.dtsi"
-#include "sw-ioctl-iomux.dtsi"
 / {
 	model = "Seewo SV15";
 	compatible = "seewo,sv15", "rockchip,rk3588";

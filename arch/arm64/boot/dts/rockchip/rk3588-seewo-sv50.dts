@@ -77,6 +77,17 @@
 	status = "okay";
 };
 
+&i2c3 {
+	acm8625m: acm8625m@2d {
+		compatible = "esmt,acm8625m";
+		reg = <0x2d>;
+		#sound-dai-cells = <0>;
+		reset_pin = <&gpio1 RK_PC2 GPIO_ACTIVE_HIGH>;
+		no_mclk;
+		status = "okay";
+	};
+};
+
 &pinctrl {
 	seewo {
 		seewoctl_iomux: seewoctl-iomux {

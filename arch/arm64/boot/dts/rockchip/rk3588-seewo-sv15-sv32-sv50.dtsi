@@ -122,22 +122,6 @@
 		};
 	};
 
-	acm8625m_sound: i2s0-sound {
-		compatible = "simple-audio-card";
-		simple-audio-card,format = "i2s";
-		simple-audio-card,name = "rockchip,acm8625m";
-		simple-audio-card,mclk-fs = <256>;
-		status = "disab";
-
-		simple-audio-card, {
-			sound-dai = <&i2s0_8ch>;
-		};
-
-		simple-audio-card,codec {
-			sound-dai = <&acm8625m>;
-		};
-	};
-
 	pcie30_avdd0v75: regulator-pcie30-avdd0v75 {
 		compatible = "regulator-fixed";
 		regulator-name = "pcie30_avdd0v75";
@@ -210,7 +194,7 @@
 		};
 	};
 
-	/*gpio-leds {
+	gpio-leds {
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
 
@@ -224,7 +208,7 @@
 			gpios = <&gpio2 RK_PC0 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "alarm";
 		};
-	};*/
+	};
 };
 
 &combphy0_ps {
@@ -385,17 +369,6 @@
 	pinctrl-0 = <&i2c3m0_xfer>;
 	clock-frequency = <100000>;
 	status = "okay";
-
-	lt8911exb: lt8911exb@29 {
-		compatible = "lontium,lt8911exb";
-		reg = <0x29>;
-		bl-on-gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_HIGH>;
-		panel-pwren-gpios = <&gpio2 RK_PB3 GPIO_ACTIVE_HIGH>;
-		bl-pwren-gpios = <&gpio2 RK_PB2 GPIO_ACTIVE_HIGH>;
-		reset-gpios = <&gpio4 RK_PC6 GPIO_ACTIVE_HIGH>;
-		lt-irq-gpios = <&gpio2 RK_PC5 GPIO_ACTIVE_HIGH>;
-		status = "okay";
-	};
 };
 
 &i2c5 {

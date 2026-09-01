@@ -115,7 +115,7 @@
 };
 
 &pinctrl {
-	/seewo {
+	/*seewo {
 		seewoctl_iomux: seewoctl-iomux {
 			rockchip,pins =
 				<1 RK_PA0 RK_FUNC_GPIO &pcfg_pull_none>,

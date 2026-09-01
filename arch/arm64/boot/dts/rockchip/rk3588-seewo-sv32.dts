@@ -11,3 +11,64 @@
 	model = "Seewo SV32";
 	compatible = "seewo,sv32", "rockchip,rk3588";
 };
+
+&i2c3 {
+	acm8625m: acm8625m@2d {
+		compatible = "esmt,acm8625m";
+		reg = <0x2d>;
+		#sound-dai-cells = <0>;
+		reset_pin = <&gpio1 RK_PC2 GPIO_ACTIVE_HIGH>;
+		no_mclk;
+		status = "okay";
+	};
+};
+
+&sata1 {
+	status = "okay";
+};
+
+&mdio1 {
+	compatible = "snps,dwmac-mdio";
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	gsw140: switch@0 {
+		compatible = "maxlinear,gsw140";
+		reg = <0>;
+
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@5 {
+				reg = <5>;
+				label = "cpu";
+				ethernet = <&gmac1>;
+				phy-mode = "rgmii";
+
+				fixed-link {
+					speed = <1000>;
+					full-duplex;
+				};
+			};
+
+			port@0 {
+				reg = <0>;
+				label = "lan1";
+				phy-mode = "internal";
+			};
+
+			port@1 {
+				reg = <1>;
+				label = "lan2";
+				phy-mode = "internal";
+			};
+
+			port@2 {
+				reg = <2>;
+				label = "lan3";
+				phy-mode = "internal";
+			};
+		};
+	};
+};

@@ -66,6 +66,10 @@
 	};
 };
 
+&combphy1_ps {
+	pinctrl-0 = <&sata1_pm_reset>;
+};
+
 &sata1 {
 	status = "okay";
 };

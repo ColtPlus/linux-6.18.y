@@ -70,6 +70,22 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&seewoctl_iomux>;
 	};*/
+
+	acm8625m_sound: i2s0-sound {
+		compatible = "simple-audio-card";
+		simple-audio-card,format = "i2s";
+		simple-audio-card,name = "rockchip,acm8625m";
+		simple-audio-card,mclk-fs = <256>;
+		status = "disab";
+
+		simple-audio-card, {
+			sound-dai = <&i2s0_8ch>;
+		};
+
+		simple-audio-card,codec {
+			sound-dai = <&acm8625m>;
+		};
+	};
 };
 
 &pcie3x4 {
@@ -77,6 +93,17 @@
 };
 
 &i2c3 {
+	lt8911exb: lt8911exb@29 {
+		compatible = "lontium,lt8911exb";
+		reg = <0x29>;
+		bl-on-gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_HIGH>;
+		panel-pwren-gpios = <&gpio2 RK_PB3 GPIO_ACTIVE_HIGH>;
+		bl-pwren-gpios = <&gpio2 RK_PB2 GPIO_ACTIVE_HIGH>;
+		reset-gpios = <&gpio4 RK_PC6 GPIO_ACTIVE_HIGH>;
+		lt-irq-gpios = <&gpio2 RK_PC5 GPIO_ACTIVE_HIGH>;
+		status = "okay";
+	};
+
 	acm8625m: acm8625m@2d {
 		compatible = "esmt,acm8625m";
 		reg = <0x2d>;
@@ -132,6 +159,10 @@
 			rockchip,pins = <1 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
+};
+
+&combphy1_ps {
+	pinctrl-0 = <&sata1_pm_reset>;
 };
 
 &sata1 {

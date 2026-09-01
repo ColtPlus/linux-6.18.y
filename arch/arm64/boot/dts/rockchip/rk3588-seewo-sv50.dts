@@ -5,7 +5,7 @@
 
 /dts-v1/;
 
-#include "rk3588-seewo-sv32-sv50.dtsi"
+#include "rk3588-seewo-sv15-sv32-sv50.dtsi"
 #include "sw-ioctl-iomux.dtsi"
 / {
 	model = "Seewo SV50";
@@ -40,7 +40,8 @@
 			"G4B6_D_HDMITX1_ON_IC",
 			"G4D1_U_PWREN_IC",
 			"G4C3_D_LED_B",
-			"G2C0_D_LED_R";
+			"G2C0_D_LED_R";
+
 		seewoctl-gpios = <&gpio1 RK_PA0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
 				 <&gpio1 RK_PD0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
 				 <&gpio1 RK_PA4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP | GPIO_OPEN_DRAIN)>,

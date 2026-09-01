@@ -6,12 +6,11 @@
 /dts-v1/;
 
 #include "rk3588-seewo-sv15-sv32-sv50.dtsi"
-#include "sw-ioctl-iomux.dtsi"
 / {
 	model = "Seewo SV50";
 	compatible = "seewo,sv50", "rockchip,rk3588";
 
-	seewo_ioctl: seewo-ioctl {
+	/*seewo_ioctl: seewo-ioctl {
 		status = "okay";
 		compatible = "seewo-ioctl";
 
@@ -70,7 +69,7 @@
 
 		pinctrl-names = "default";
 		pinctrl-0 = <&seewoctl_iomux>;
-	};
+	};*/
 };
 
 &pcie3x4 {
@@ -89,7 +88,7 @@
 };
 
 &pinctrl {
-	seewo {
+	/seewo {
 		seewoctl_iomux: seewoctl-iomux {
 			rockchip,pins =
 				<1 RK_PA0 RK_FUNC_GPIO &pcfg_pull_none>,
@@ -118,9 +117,9 @@
 				<4 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>,
 				<2 RK_PC0 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
-	};
+	};*/
 
-	/*usb {
+	usb {
 		usb20_pwren_a: usb20-pwren-a {
 			rockchip,pins = <4 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
@@ -132,7 +131,7 @@
 		usb30_pwren_b: usb30-pwren-b {
 			rockchip,pins = <1 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
-	};*/
+	};
 };
 
 &sata1 {

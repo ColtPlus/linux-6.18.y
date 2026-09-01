@@ -16,5 +16,155 @@
 	status = "okay";
 };
 
-&pinctrl {
+/*&combphy0_ps {
+	pinctrl-0 = <&sata0_pm_reset>;
+};*/
+
+&combphy1_ps {
+	pinctrl-0 = <&sata1_pm_reset>;
+};
+
+&gmac0 {
+	clock_in_out = "output";
+	phy-mode = "rgmii";
+	pinctrl-0 = <&gmac0_miim &gmac0_tx_bus2 &gmac0_rx_bus2 &gmac0_rgmii_clk &gmac0_rgmii_bus>;
+	pinctrl-names = "default";
+	snps,reset-delays-us = <0 250000 500000>;
+	status = "okay";
+
+	fixed-link {
+		speed = <1000>;
+		full-duplex;
+		pause;
+	};
+};
+
+&mdio0 {
+	status = "okay";
+
+	yt9215_0: switch@1d {
+		compatible = "motorcomm,yt9215";
+		reg = <0x1d>;
+		dsa,member = <1 0>;
+
+		mdio {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			sw1phy1: phy@1 { reg = <1>; };
+			sw1phy2: phy@2 { reg = <2>; };
+			sw1phy3: phy@3 { reg = <3>; };
+			sw1phy4: phy@4 { reg = <4>; };
+		};
+
+		ethernet-ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			ethernet-port@1 {
+				reg = <0x01>;
+				label = "lan5";
+				phy-mode = "internal";
+				phy-handle = <&sw1phy1>;
+			};
+
+			ethernet-port@2 {
+				reg = <0x02>;
+				label = "lan6";
+				phy-mode = "internal";
+				phy-handle = <&sw1phy2>;
+			};
+
+			ethernet-port@3 {
+				reg = <0x03>;
+				label = "lan7";
+				phy-mode = "internal";
+				phy-handle = <&sw1phy3>;
+			};
+
+			ethernet-port@4 {
+				reg = <0x04>;
+				label = "lan8";
+				phy-mode = "internal";
+				phy-handle = <&sw1phy4>;
+			};
+
+			ethernet-port@9 {
+				reg = <0x09>;
+				ethernet = <&gmac0>;
+				phy-mode = "rgmii-txid";
+
+				fixed-link {
+					speed = <1000>;
+					full-duplex;
+					pause;
+				};
+			};
+		};
+	};
+};
+
+&mdio1 {
+	status = "okay";
+
+	yt9215_1: switch@1d {
+		compatible = "motorcomm,yt9215";
+		reg = <0x1d>;
+		dsa,member = <0 0>;
+
+		mdio {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			sw0phy1: phy@1 { reg = <1>; };
+			sw0phy2: phy@2 { reg = <2>; };
+			sw0phy3: phy@3 { reg = <3>; };
+			sw0phy4: phy@4 { reg = <4>; };
+		};
+
+		ethernet-ports {
+			#address-cells = <0x01>;
+			#size-cells = <0x00>;
+
+			ethernet-port@1 {
+				reg = <0x01>;
+				label = "lan1";
+				phy-mode = "internal";
+				phy-handle = <&sw0phy1>;
+			};
+
+			ethernet-port@2 {
+				reg = <0x02>;
+				label = "lan2";
+				phy-mode = "internal";
+				phy-handle = <&sw0phy2>;
+			};
+
+			ethernet-port@3 {
+				reg = <0x03>;
+				label = "lan3";
+				phy-mode = "internal";
+				phy-handle = <&sw0phy3>;
+			};
+
+			ethernet-port@4 {
+				reg = <0x04>;
+				label = "lan4";
+				phy-mode = "internal";
+				phy-handle = <&sw0phy4>;
+			};
+
+			ethernet-port@9 {
+				reg = <0x09>;
+				ethernet = <&gmac1>;
+				phy-mode = "rgmii-txid";
+
+				fixed-link {
+					speed = <1000>;
+					full-duplex;
+					pause;
+				};
+			};
+		};
+	};
 };

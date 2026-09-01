@@ -5,7 +5,7 @@
 
 /dts-v1/;
 
-#include "rk3588-seewo-sv32-sv50.dtsi"
+#include "rk3588-seewo-sv15-sv32-sv50.dtsi"
 
 / {
 	model = "Seewo SV32";

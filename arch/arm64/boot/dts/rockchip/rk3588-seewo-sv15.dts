@@ -11,10 +11,6 @@
 	compatible = "seewo,sv15", "rockchip,rk3588";
 };
 
-&pcie3x4 {
-	status = "okay";
-};
-
 &mdio0 {
 	status = "okay";
 

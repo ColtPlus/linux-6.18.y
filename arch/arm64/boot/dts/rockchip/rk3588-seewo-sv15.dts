@@ -15,29 +15,6 @@
 	status = "okay";
 };
 
-/*&combphy0_ps {
-	pinctrl-0 = <&sata0_pm_reset>;
-};*/
-
-&combphy1_ps {
-	pinctrl-0 = <&sata1_pm_reset>;
-};
-
-&gmac0 {
-	clock_in_out = "output";
-	phy-mode = "rgmii";
-	pinctrl-0 = <&gmac0_miim &gmac0_tx_bus2 &gmac0_rx_bus2 &gmac0_rgmii_clk &gmac0_rgmii_bus>;
-	pinctrl-names = "default";
-	snps,reset-delays-us = <0 250000 500000>;
-	status = "okay";
-
-	fixed-link {
-		speed = <1000>;
-		full-duplex;
-		pause;
-	};
-};
-
 &mdio0 {
 	status = "okay";
 

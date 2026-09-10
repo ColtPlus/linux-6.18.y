@@ -765,7 +765,6 @@
 };
 
 &gmac1 {
-	local-mac-address = [90 e4 68 52 8e 14];
 	status = "okay";
 	phy-mode = "rgmii";
 	clock_in_out = "output";

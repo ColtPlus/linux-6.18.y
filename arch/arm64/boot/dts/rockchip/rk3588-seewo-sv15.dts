@@ -28,6 +28,41 @@
 	};
 };
 
+&sata1 {
+	status = "okay";
+};
+
+&sata2 {
+	status = "okay";
+};
+
+&pinctrl {
+	usb {
+		usb20_pwren: usb20-pwren {
+			rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		usb30_pwren: usb30-pwren {
+			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+	sata {
+		sata_pwren: sata-pwren {
+			rockchip,pins = <1 RK_PD4 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+};
+
+&gmac0 {
+	status = "okay";
+	tx_delay = <58>;
+	rx_delay = <0>;
+};
+
+&gmac1 {
+	status = "disabled";
+};
+
 &mdio0 {
 	status = "okay";
 
@@ -89,23 +124,6 @@
 					pause;
 				};
 			};
-		};
-	};
-};
-
-&pinctrl {
-	usb {
-		usb20_pwren: usb20-pwren {
-			rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-
-		usb30_pwren: usb30-pwren {
-			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-
-	sata {
-		sata_pwren: sata-pwren {
-			rockchip,pins = <1 RK_PD4 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 };

@@ -765,7 +765,6 @@
 };
 
 &gmac1 {
-	status = "okay";
 	phy-mode = "rgmii";
 	clock_in_out = "output";
 	snps,reset-gpio = <&gpio3 RK_PB7 GPIO_ACTIVE_HIGH>;

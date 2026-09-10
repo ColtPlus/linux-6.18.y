@@ -111,7 +111,7 @@
 		compatible = "simple-audio-card";
 		simple-audio-card,name = "rockchip,dp1";
 		simple-audio-card,mclk-fs = <512>;
-		status = "disabled";
+		status = "disab";
 
 		simple-audio-card, {
 			sound-dai = <&spdif_tx5>;
@@ -191,22 +191,6 @@
 			reusable;
 			reg = <0x0 (256 * 0x100000) 0x0 (256 * 0x100000)>;
 			linux,cma-default;
-		};
-	};
-
-	gpio-leds {
-		compatible = "gpio-leds";
-		pinctrl-names = "default";
-
-		user-led {
-			gpios = <&gpio4 RK_PC3 GPIO_ACTIVE_HIGH>;
-			linux,default-trigger = "boot";
-			default-state = "on";
-		};
-
-		sys-led {
-			gpios = <&gpio2 RK_PC0 GPIO_ACTIVE_HIGH>;
-			linux,default-trigger = "alarm";
 		};
 	};
 };

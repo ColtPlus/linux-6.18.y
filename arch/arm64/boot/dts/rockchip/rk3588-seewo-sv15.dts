@@ -203,7 +203,7 @@
 		pwm-names = "fan2";
 		pwms = <&pwm9 0 40000 0>;
 		pwm-frequency = <25000>;
-		rd-gpios = <gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
+		rd-gpios = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
 		pwm-polarity-inversed;
 	};
 

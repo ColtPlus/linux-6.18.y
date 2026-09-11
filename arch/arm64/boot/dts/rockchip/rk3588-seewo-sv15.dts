@@ -189,7 +189,7 @@
 		pinctrl-0 = <&vcc5v0_otg_en>;
 	};
 
-pwm_fan1: pwm-fan1 {
+	pwm_fan1: pwm-fan1 {
 		compatible = "kdl-pwm-fan";
 		pwm-names = "fan1";
 		pwms = <&pwm8 0 40000 0>;
@@ -661,8 +661,15 @@ pwm_fan1: pwm-fan1 {
 	};
 };
 
+&pwm1 {
+	status = "okay";
+};
 
 &pwm8 {
+	status = "okay";
+};
+
+&pwm9 {
 	status = "okay";
 };
 

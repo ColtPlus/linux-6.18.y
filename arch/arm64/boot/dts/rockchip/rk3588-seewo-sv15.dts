@@ -189,21 +189,7 @@
 		pinctrl-0 = <&vcc5v0_otg_en>;
 	};
 
-	reserved_memory: reserved-memory {
-		#address-cells = <2>;
-		#size-cells = <2>;
-		ranges;
-
-		cma: linux,cma@10000000 {
-			compatible = "shared-dma-pool";
-			reusable;
-			reg = <0x0 (256 * 0x100000) 0x0 (256 * 0x100000)>;
-			linux,cma-default;
-		};
-	};
-};
-
-	pwm_fan1: pwm-fan1 {
+pwm_fan1: pwm-fan1 {
 		compatible = "kdl-pwm-fan";
 		pwm-names = "fan1";
 		pwms = <&pwm8 0 40000 0>;
@@ -220,6 +206,20 @@
 		rd-gpios = <gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
 		pwm-polarity-inversed;
 	};
+
+	reserved_memory: reserved-memory {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+
+		cma: linux,cma@10000000 {
+			compatible = "shared-dma-pool";
+			reusable;
+			reg = <0x0 (256 * 0x100000) 0x0 (256 * 0x100000)>;
+			linux,cma-default;
+		};
+	};
+};
 
 &combphy0_ps {
 	status = "okay";

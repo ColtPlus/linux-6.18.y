@@ -522,10 +522,6 @@
 };
 
 &i2s0_8ch {
-	pinctrl-names = "default";
-	pinctrl-0 = <&i2s0_lrck
-		     &i2s0_sclk
-		     &i2s0_sdo0>;
 	status = "okay";
 };
 
@@ -533,7 +529,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&i2s2m1_lrck
 		     &i2s2m1_sclk
-		     &i2s2m1_sdo0>;
+		     &i2s2m1_sdo>;
 	status = "okay";
 };
 

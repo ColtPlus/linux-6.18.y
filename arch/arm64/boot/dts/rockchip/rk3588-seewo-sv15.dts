@@ -86,6 +86,24 @@
 		};
 	};
 
+	pwm_fan1: pwm-fan1 {
+		compatible = "kdl-pwm-fan";
+		pwm-names = "fan1";
+		pwms = <&pwm8 0 40000 0>;
+		pwm-frequency = <25000>;
+		rd-gpios = <&gpio3 RK_PA0 GPIO_ACTIVE_HIGH>;
+		pwm-polarity-inversed;
+	};
+
+	pwm_fan2: pwm-fan2 {
+		compatible = "kdl-pwm-fan";
+		pwm-names = "fan2";
+		pwms = <&pwm9 0 40000 0>;
+		pwm-frequency = <25000>;
+		rd-gpios = <gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
+		pwm-polarity-inversed;
+	};
+
 	vcc12v_dcin: regulator-vcc12v-dcin {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc12v_dcin";
@@ -187,24 +205,6 @@
 		vin-supply = <&vcc5v0_sys>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&vcc5v0_otg_en>;
-	};
-
-	pwm_fan1: pwm-fan1 {
-		compatible = "kdl-pwm-fan";
-		pwm-names = "fan1";
-		pwms = <&pwm8 0 40000 0>;
-		pwm-frequency = <25000>;
-		rd-gpios = <&gpio3 RK_PA0 GPIO_ACTIVE_HIGH>;
-		pwm-polarity-inversed;
-	};
-
-	pwm_fan2: pwm-fan2 {
-		compatible = "kdl-pwm-fan";
-		pwm-names = "fan2";
-		pwms = <&pwm9 0 40000 0>;
-		pwm-frequency = <25000>;
-		rd-gpios = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
-		pwm-polarity-inversed;
 	};
 
 	reserved_memory: reserved-memory {
@@ -573,17 +573,17 @@
 	cooling-maps {
 		map0 {
 			trip = <&package_fan0>;
-			cooling-device = <&fan THERMAL_NO_LIMIT 2>;
+			cooling-device = <&pwm_fan1 THERMAL_NO_LIMIT 2>;
 		};
 
 		map1 {
 			trip = <&package_fan1>;
-			cooling-device = <&fan 3 5>;
+			cooling-device = <&pwm_fan1 3 5>;
 		};
 
 		map2 {
 			trip = <&package_fan2>;
-			cooling-device = <&fan 6 THERMAL_NO_LIMIT>;
+			cooling-device = <&pwm_fan1 6 THERMAL_NO_LIMIT>;
 		};
 	};
 };

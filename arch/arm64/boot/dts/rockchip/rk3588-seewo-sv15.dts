@@ -29,7 +29,7 @@
 		stdout-path = "serial2:1500000n8";
 	};
 
-	gpio-leds {
+	gpio_leds: gpio-leds {
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
 
@@ -45,7 +45,7 @@
 		};
 	};
 
-	fiq-debugger {
+	fiq_debugger: fiq-debugger {
 		compatible = "rockchip,fiq-debugger";
 		rockchip,serial-id = <2>;
 		rockchip,wake-irq = <0>;
@@ -71,7 +71,7 @@
 		};
 	};
 
-	adc_power_keys: adc-power-keys {
+	adcpower_keys: adcpower-keys {
 		compatible = "adc-keys";
 		io-channels = <&saradc 3>;
 		io-channel-names = "buttons";
@@ -81,7 +81,7 @@
 		adc-power-key {
 			label = "power key";
 			linux,code = <KEY_POWER>;
-			press-threshold-microvolt = <192920>;
+			press-threshold-microvolt = <1750>;
 			wakeup-source;
 		};
 	};
@@ -314,7 +314,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&i2c0m2_xfer>;
 
-	vdd_cpu_big0_s0: vdd_cpu_big0_mem_s0: regulator@42 {
+	vdd_cpu_big0_s0: vdd_cpu_big0_mem_s0: rk8602@42 {
 		compatible = "rockchip,rk8602";
 		reg = <0x42>;
 		vin-supply = <&vcc5v0_sys>;
@@ -331,7 +331,7 @@
 		};
 	};
 
-	vdd_cpu_big1_s0: vdd_cpu_big1_mem_s0: regulator@43 {
+	vdd_cpu_big1_s0: vdd_cpu_big1_mem_s0: rk8603@43 {
 		compatible = "rockchip,rk8603", "rockchip,rk8602";
 		reg = <0x43>;
 		vin-supply = <&vcc5v0_sys>;
@@ -354,7 +354,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&i2c1m2_xfer>;
 
-	vdd_npu_s0: regulator@42 {
+	vdd_npu_s0: rk8602@42 {
 		compatible = "rockchip,rk8602";
 		reg = <0x42>;
 		vin-supply = <&vcc5v0_sys>;
@@ -418,7 +418,31 @@
 	pinctrl-0 = <&i2c5m0_xfer>;
 	status = "okay";
 
-	lt8711uxc1: lt8711uxc1@3f {
+	/*lt6911c_A: lt6911c_A@2b {
+		status = "okay";
+		compatible = "lontium,lt6911c";
+		reg = <0x2b>;
+		clocks = <&cru CLK_MIPI_CAMARAOUT_M2>;
+		clock-names = "xvclk";
+		reset-gpios = <&gpio4 RK_PC1 GPIO_ACTIVE_HIGH>;
+		res-change-gpios = <&gpio3 RK_PC3 GPIO_ACTIVE_HIGH>;
+		plugin-det-gpios = <&gpio3 RK_PD1 GPIO_ACTIVE_HIGH>;
+		rockchip,camera-module-index = <0>;
+		rockchip,camera-module-facing = "back";
+		rockchip,camera-module-name = "lt6911c_A";
+		rockchip,camera-module-lens-name = "NC";
+		cvte,hdmi-port-name = "HDMIIN1";
+
+		port {
+
+			endpoint {
+				remote-endpoint = <&csi2_dcphy1_ports_port0_endpoint1>;
+				data-lanes = <1 2 3 4>;
+			};
+		};
+	};
+
+	lt8711uxc: lt8711uxc@3f {
 		compatible = "lontium,lt8711uxc-u3";
 		reg = <0x3f>;
 		plugin-det-gpios = <&gpio3 RK_PD5 GPIO_ACTIVE_HIGH>;
@@ -508,7 +532,7 @@
 		compatible = "esmt,ad82120b";
 		reg = <0x68>;
 		#sound-dai-cells = <0x00>;
-		mute-gpios = <&gpio3 RK_PB1 0x00>;
+		mute-gpios = <&gpio3 RK_PB1 GPIO_ACTIVE_HIGH>;
 		no_mclk;
 	};
 
@@ -517,7 +541,7 @@
 		compatible = "aip8563";
 		reg = <0x51>;
 		interrupt-parent = <&gpio1>;
-		interrupts = <RK_PB5 0x08>;
+		interrupts = <RK_PB5 IRQ_TYPE_LEVEL_LOW>;
 	};
 };
 
@@ -584,6 +608,7 @@
 	};
 };
 
+/*pcie@fe190000*/
 &pcie2x1l2 {
 	reset-gpios = <&gpio1 RK_PB4 GPIO_ACTIVE_HIGH>;
 	status = "okay";
@@ -593,12 +618,14 @@
 	status = "okay";
 };
 
+/*pcie@fe150000*/
 &pcie3x4 {
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
 	status = "okay";
 };
 
+/*pcie@fe160000*/
 &pcie3x2 {
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
@@ -724,6 +751,11 @@
 
 &uart0 {
 	pinctrl-0 = <&uart0m0_xfer>;
+	status = "okay";
+};
+
+&uart2 {
+	pinctrl-0 = <&uart2m0_xfer>;
 	status = "okay";
 };
 
@@ -981,7 +1013,72 @@
 			ethernet-port@9 {
 				reg = <0x09>;
 				ethernet = <&gmac0>;
-				phy-mode = "rgmii-txid";
+				phy-mode = "rgmii";
+
+				fixed-link {
+					speed = <1000>;
+					full-duplex;
+					pause;
+				};
+			};
+		};
+	};
+};
+
+&mdio1 {
+	status = "okay";
+
+	yt9215_1: switch@1d {
+		compatible = "motorcomm,yt9215";
+		reg = <0x1d>;
+		dsa,member = <0 0>;
+
+		mdio {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			sw0phy1: phy@1 { reg = <1>; };
+			sw0phy2: phy@2 { reg = <2>; };
+			sw0phy3: phy@3 { reg = <3>; };
+			sw0phy4: phy@4 { reg = <4>; };
+		};
+
+		ethernet-ports {
+			#address-cells = <0x01>;
+			#size-cells = <0x00>;
+
+			ethernet-port@1 {
+				reg = <0x01>;
+				label = "lan5";
+				phy-mode = "internal";
+				phy-handle = <&sw0phy1>;
+			};
+
+			ethernet-port@2 {
+				reg = <0x02>;
+				label = "lan6";
+				phy-mode = "internal";
+				phy-handle = <&sw0phy2>;
+			};
+
+			ethernet-port@3 {
+				reg = <0x03>;
+				label = "lan7";
+				phy-mode = "internal";
+				phy-handle = <&sw0phy3>;
+			};
+
+			ethernet-port@4 {
+				reg = <0x04>;
+				label = "lan8";
+				phy-mode = "internal";
+				phy-handle = <&sw0phy4>;
+			};
+
+			ethernet-port@9 {
+				reg = <0x09>;
+				ethernet = <&gmac1>;
+				phy-mode = "rgmii";
 
 				fixed-link {
 					speed = <1000>;

@@ -618,6 +618,7 @@
 };
 
 &pcie3x4 {
+	num-lanes = <2>;
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
 	status = "okay";

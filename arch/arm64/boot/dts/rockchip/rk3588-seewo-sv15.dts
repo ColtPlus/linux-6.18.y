@@ -608,7 +608,6 @@
 	};
 };
 
-/*pcie@fe190000*/
 &pcie2x1l2 {
 	reset-gpios = <&gpio1 RK_PB4 GPIO_ACTIVE_HIGH>;
 	status = "okay";
@@ -618,14 +617,12 @@
 	status = "okay";
 };
 
-/*pcie@fe150000*/
 &pcie3x4 {
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
 	status = "okay";
 };
 
-/*pcie@fe160000*/
 &pcie3x2 {
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
@@ -1087,7 +1084,7 @@
 				};
 			};
 		};
-	};
+  };
 };
 
 #include "rk3588-seewo-vngpu.dtsi"

@@ -86,6 +86,15 @@
 		};
 	};
 
+	hardware_version: hardware-version {
+		compatible = "hardware-version";
+		io-channels = <&saradc 5 &saradc 7>;
+		io-channel-names = "ADC5", "0ADC7";
+		keyup-threshold-microvolt = <1800000>;
+		poll-interval = <100>;
+	};
+
+
 	pwm_fan1: pwm-fan1 {
 		compatible = "kdl-pwm-fan";
 		pwm-names = "fan1";
@@ -528,24 +537,31 @@
 	clock-frequency = <100000>;
 
 	ad82120b: ad82120b@68 {
-		status = "okay";
 		compatible = "esmt,ad82120b";
 		reg = <0x68>;
 		#sound-dai-cells = <0x00>;
 		mute-gpios = <&gpio3 RK_PB1 GPIO_ACTIVE_HIGH>;
 		no_mclk;
+		status = "okay";
 	};
 
 	aip8563: aip8563@51 {
-		status = "okay";
 		compatible = "aip8563";
 		reg = <0x51>;
 		interrupt-parent = <&gpio1>;
 		interrupts = <RK_PB5 IRQ_TYPE_LEVEL_LOW>;
+		status = "okay";
 	};
 };
 
 &i2s0_8ch {
+	status = "okay";
+};
+
+&i2s1_8ch {
+	pinctrl-names = "default";
+	assigned-clocks = <&cru CLK_I2S1_8CH_RX>;
+	assigned-clock-parents = <&cru CLK_I2S1_8CH_TX_SRC>;
 	status = "okay";
 };
 
@@ -614,18 +630,22 @@
 };
 
 &pcie30phy {
-	status = "okay";
-};
-
-&pcie3x4 {
-	num-lanes = <2>;
-	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
-	vpcie3v3-supply = <&vcc3v3_pcie30>;
+	rockchip,pcie30-phymode = <0>;
 	status = "okay";
 };
 
 &pcie3x2 {
+	rockchip,pipe-grf = <&php_grf>;
+	num-lanes = <2>;
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
+	vpcie3v3-supply = <&vcc3v3_pcie30>;
+	status = "okay";
+};
+
+&pcie3x4 {
+	rockchip,pipe-grf = <&php_grf>;
+	num-lanes = <2>;
+	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
 	status = "okay";
 };
@@ -649,11 +669,11 @@
 		};
 
 		usb20_pwren: usb20-pwren {
-			rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
+			rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_output_high>;
 		};
 
 		usb30_pwren: usb30-pwren {
-			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
+			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_output_high>;
 		};
 	};
 

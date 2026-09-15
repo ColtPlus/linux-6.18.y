@@ -271,7 +271,7 @@
 
 &hdmi0 {
 	pinctrl-0 = <&hdmim0_tx0_hpd &hdmim0_tx0_scl &hdmim0_tx0_sda>;
-	tmds-enable-gpios = <&gpio4 RK_PB5 GPIO_ACTIVE_HIGH>;
+	frl-enable-gpios = <&gpio4 RK_PB5 GPIO_ACTIVE_LOW>;
 	status = "okay";
 };
 
@@ -288,7 +288,7 @@
 &hdmi1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&hdmim0_tx1_hpd &hdmim1_tx1_scl &hdmim1_tx1_sda>;
-	tmds-enable-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+	frl-enable-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
 	status = "okay";
 };
 

@@ -826,8 +826,6 @@
 
 &u2phy0_otg {
 	vbus-supply = <&vcc5v0_otg>;
-	rockchip,typec-vbus-det;
-	rockchip,dis-u2-susphy;
 	status = "okay";
 };
 
@@ -952,9 +950,9 @@
 	};
 };
 
-&wdt {
+/*&wdt {
 	status = "disabled";
-};
+};*/
 
 &spdif_tx5 {
 	status = "okay";

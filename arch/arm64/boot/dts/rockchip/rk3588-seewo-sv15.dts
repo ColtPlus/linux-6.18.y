@@ -803,11 +803,6 @@
 	status = "okay";
 };
 
-&uart2 {
-	pinctrl-0 = <&uart2m0_xfer>;
-	status = "okay";
-};
-
 &uart4 {
 	pinctrl-0 = <&uart4m2_xfer>;
 	status = "okay";

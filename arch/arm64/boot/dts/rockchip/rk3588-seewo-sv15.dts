@@ -625,6 +625,8 @@
 };
 
 &pcie2x1l2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pcie2_2_rst>;
 	reset-gpios = <&gpio1 RK_PB4 GPIO_ACTIVE_HIGH>;
 	status = "okay";
 };
@@ -636,10 +638,11 @@
 
 &pcie3x4 {
 	num-lanes = <2>;
-	ranges = <0x00000800 0x0 0xf0000000 0x0 0xf0000000 0x0 0x00100000>,
+	/*ranges = <0x00000800 0x0 0xf0000000 0x0 0xf0000000 0x0 0x00100000>,
 		 <0x81000000 0x0 0xf0100000 0x0 0xf0100000 0x0 0x00100000>,
 		 <0x82000000 0x0 0xf0200000 0x0 0xf0200000 0x0 0x00e00000>,
-		 <0xc3000000 0x9 0x00000000 0x9 0x00000000 0x0 0x40000000>;
+		 <0xc3000000 0x9 0x00000000 0x9 0x00000000 0x0 0x40000000>;*/
+	pinctrl-0 = <&pcie3x4_rst>;
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
 	status = "okay";
@@ -647,10 +650,11 @@
 
 &pcie3x2 {
 	num-lanes = <2>;
-	ranges = <0x00000800 0x0 0xf1000000 0x0 0xf1000000 0x0 0x00100000>,
+	/*ranges = <0x00000800 0x0 0xf1000000 0x0 0xf1000000 0x0 0x00100000>,
 		 <0x81000000 0x0 0xf1100000 0x0 0xf1100000 0x0 0x00100000>,
 		 <0x82000000 0x0 0xf1200000 0x0 0xf1200000 0x0 0x00e00000>,
-		 <0xc3000000 0x9 0x40000000 0x9 0x40000000 0x0 0x40000000>;
+		 <0xc3000000 0x9 0x40000000 0x9 0x40000000 0x0 0x40000000>;*/
+	pinctrl-0 = <&pcie3x2_rst>;
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
 	status = "okay";
@@ -704,6 +708,20 @@
 	sys12v {
 		sys12v_pwren: sys12v-pwren {
 			rockchip,pins = <1 RK_PC7 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+
+	pcie {
+		pcie2_2_rst: pcie2-2-rst {
+			rockchip,pins = <1 RK_PB4 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		pcie3x2_rst: pcie3x2-rst {
+			rockchip,pins = <1 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		pcie3x4_rst: pcie3x4-rst {
+			rockchip,pins = <1 RK_PA7 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 };

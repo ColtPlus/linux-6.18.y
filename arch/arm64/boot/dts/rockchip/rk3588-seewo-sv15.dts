@@ -671,7 +671,7 @@
 	/*reset-gpios = <0xf1 0x07 0x00>;*/
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
-	status = "okay";
+	status = "disabled";
 };
 
 &pcie3x2 {

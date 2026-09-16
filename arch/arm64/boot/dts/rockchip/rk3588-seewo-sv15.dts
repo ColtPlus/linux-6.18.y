@@ -115,6 +115,7 @@
 		pwm-names = "fan1";
 		pwms = <&pwm8 0 40000 0>;
 		pwm-frequency = <25000>;
+		/*rd-gpios = <0x130 0x00 0x00>;*/
 		rd-gpios = <&gpio3 RK_PA0 GPIO_ACTIVE_HIGH>;
 		pwm-polarity-inversed;
 	};
@@ -124,6 +125,7 @@
 		pwm-names = "fan2";
 		pwms = <&pwm9 0 40000 0>;
 		pwm-frequency = <25000>;
+		/*rd-gpios = <0x130 0x01 0x00>;*/
 		rd-gpios = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
 		pwm-polarity-inversed;
 	};
@@ -180,12 +182,14 @@
 	vcc3v3_pcie30: regulator-vcc3v3-pcie30 {
 		compatible = "regulator-fixed";
 		enable-active-high;
+		/*gpios = <0xf1 0x0e 0x00>;*/
 		gpios = <&gpio1 RK_PB6 GPIO_ACTIVE_HIGH>;
 		regulator-name = "vcc3v3_pcie30";
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
 		startup-delay-us = <7500>;
 		vin-supply = <&vcc12v_dcin>;
+		pinctrl-0 = <&vcc3v3_pcie30_en>;
 	};
 
 	vcc5v0_host: regulator-vcc5v0-host {
@@ -197,6 +201,7 @@
 		regulator-max-microvolt = <5000000>;
 		vin-supply = <&vcc5v0_sys>;
 		enable-active-high;
+		/*gpio = <0xe6 0x08 0x00>;*/
 		gpio = <&gpio4 RK_PB0 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&vcc5v0_host_en>;
@@ -210,6 +215,7 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 		enable-active-high;
+		/*gpio = <0xe6 0x03 0x00>;*/
 		gpio = <&gpio4 RK_PA3 GPIO_ACTIVE_HIGH>;
 		vin-supply = <&vcc5v0_sys>;
 		pinctrl-names = "default";
@@ -266,6 +272,7 @@
 };
 
 &hdmi0 {
+	/*enable-gpios = <0xe6 0x0d 0x00>;*/
 	frl-enable-gpios = <&gpio4 RK_PB5 GPIO_ACTIVE_LOW>;
 	status = "okay";
 };
@@ -281,6 +288,7 @@
 };
 
 &hdmi1 {
+	/*enable-gpios = <0xe6 0x0e 0x00>;*/
 	frl-enable-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_LOW>;
 	status = "okay";
 };
@@ -456,6 +464,8 @@
 	lt8711uxc: lt8711uxc@3f {
 		compatible = "lontium,lt8711uxc-u3";
 		reg = <0x3f>;
+		/*plugin-det-gpios = <0x130 0x1d 0x00>;
+		reset-gpios = <0x130 0x0a 0x00>;*/
 		plugin-det-gpios = <&gpio3 RK_PD5 GPIO_ACTIVE_HIGH>;
 		reset-gpios = <&gpio3 RK_PB2 GPIO_ACTIVE_HIGH>;
 		status = "okay";
@@ -466,6 +476,30 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&i2c6m0_xfer>;
 	status = "okay";
+
+	/*lt6911c_B@2b {
+		status = "okay";
+		compatible = "lontium,lt6911c";
+		reg = <0x2b>;
+		clocks = <&cru CLK_MIPI_CAMARAOUT_M4>;
+		clock-names = "xvclk";
+		reset-gpios = <&gpio3 RK_PD2 GPIO_ACTIVE_HIGH>;
+		res-change-gpios = <&gpio3 RK_PD3 GPIO_ACTIVE_HIGH>;
+		plugin-det-gpios = <&gpio3 RK_PD4 GPIO_ACTIVE_HIGH>;
+		rockchip,camera-module-index = <1>;
+		rockchip,camera-module-facing = "back";
+		rockchip,camera-module-name = "lt6911c_B";
+		rockchip,camera-module-lens-name = "NC";
+		cvte,hdmi-port-name = "HDMIIN2";
+
+		port {
+
+			endpoint {
+				remote-endpoint = <&csi2-dphy3_ports_port0_endpoint1>;
+				data-lanes = <1 2 3 4>;
+			};
+		};
+	};*/
 
 	usbc0: et7304@4e {
 		compatible = "etek,et7303";
@@ -542,6 +576,7 @@
 		compatible = "esmt,ad82120b";
 		reg = <0x68>;
 		#sound-dai-cells = <0x00>;
+		/*mute-gpios = <0x130 0x09 0x00>;*/
 		mute-gpios = <&gpio3 RK_PB1 GPIO_ACTIVE_HIGH>;
 		no_mclk;
 		status = "okay";
@@ -550,6 +585,8 @@
 	aip8563: aip8563@51 {
 		compatible = "aip8563";
 		reg = <0x51>;
+		/*interrupt-parent = <0xf1>;
+		interrupts = <0x0d 0x08>;*/
 		interrupt-parent = <&gpio1>;
 		interrupts = <RK_PB5 IRQ_TYPE_LEVEL_LOW>;
 		status = "okay";
@@ -618,18 +655,20 @@
 &pcie2x1l2 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pcie2_2_rst>;
+	/*reset-gpios = <0xf1 0x0c 0x00>;*/
 	reset-gpios = <&gpio1 RK_PB4 GPIO_ACTIVE_HIGH>;
 	status = "okay";
 };
 
 &pcie30phy {
-	data-lanes = <1 1 2 2>;
+	/*data-lanes = <1 1 2 2>;*/
 	status = "okay";
 };
 
 &pcie3x4 {
-	num-lanes = <2>;
+	/*num-lanes = <2>;*/
 	pinctrl-0 = <&pcie3x4_rst>;
+	/*reset-gpios = <0xf1 0x07 0x00>;*/
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
 	status = "okay";
@@ -638,9 +677,10 @@
 &pcie3x2 {
 	num-lanes = <2>;
 	pinctrl-0 = <&pcie3x2_rst>;
+	/*reset-gpios = <0xf1 0x0f 0x00>;*/
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
-	status = "okay";
+	status = "disabled";
 };
 
 &sata1 {
@@ -695,6 +735,10 @@
 	};
 
 	pcie {
+		vcc3v3_pcie30_en: vcc3v3-pcie30-en{
+			rockchip,pins = <1 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
 		pcie2_2_rst: pcie2-2-rst {
 			rockchip,pins = <1 RK_PB4 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
@@ -840,6 +884,8 @@
 &usbdp_phy0 {
 	orientation-switch;
 	svid = <0xff01>;
+	/*sbu1-dc-gpios = <0x12c 0x16 0x00>;
+	sbu2-dc-gpios = <0x12c 0x1b 0x00>;*/
 	sbu1-dc-gpios = <&gpio0 RK_PC6 GPIO_ACTIVE_HIGH>;
 	sbu2-dc-gpios = <&gpio0 RK_PD3 GPIO_ACTIVE_HIGH>;
 	status = "okay";

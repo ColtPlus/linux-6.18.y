@@ -639,7 +639,7 @@
 };
 
 &pcie30phy {
-	rockchip,pcie30-phymode = <0>;
+	data-lanes = <1 1 2 2>;
 	status = "okay";
 };
 

@@ -6,6 +6,12 @@
 /delete-node/ &vdec1;
 /delete-node/ &vdec1_mmu;
 /delete-node/ &av1d;
+/delete-node/ &rknn_mmu_0;
+/delete-node/ &rknn_mmu_1;
+/delete-node/ &rknn_mmu_2;
+/delete-node/ &rknn_core_0;
+/delete-node/ &rknn_core_1;
+/delete-node/ &rknn_core_2;
 
 /{
 	rockchip_system_monitor: rockchip-system-monitor {

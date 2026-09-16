@@ -222,6 +222,28 @@
 		pinctrl-0 = <&vcc5v0_otg_en>;
 	};
 
+	usb20_pwr: regulator-usb20-pwr {
+		compatible = "regulator-fixed";
+		regulator-name = "usb20_pwr";
+		regulator-boot-on;
+		regulator-always-on;
+		enable-active-high;
+		gpio = <&gpio1 RK_PC2 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&usb20_pwren>;
+	};
+
+	usb30_pwr: regulator-usb30-pwr {
+		compatible = "regulator-fixed";
+		regulator-name = "usb30_pwr";
+		regulator-boot-on;
+		regulator-always-on;
+		enable-active-high;
+		gpio = <&gpio1 RK_PC6 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&usb30_pwren>;
+	};
+
 	reserved_memory: reserved-memory {
 		#address-cells = <2>;
 		#size-cells = <2>;
@@ -665,23 +687,23 @@
 	status = "okay";
 };
 
-&pcie3x4 {
-	/*num-lanes = <2>;*/
+/*fe150000:reset-gpios = <0xf1 0x07 0x00>*/
+/*&pcie3x4 {
+	num-lanes = <2>;
 	pinctrl-0 = <&pcie3x4_rst>;
-	/*reset-gpios = <0xf1 0x07 0x00>;*/
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
-	status = "disabled";
-};
+	status = "okay";
+};*/
 
-&pcie3x2 {
+/*fe160000:reset-gpios = <0xf1 0x0f 0x00>*/
+/*&pcie3x2 {
 	num-lanes = <2>;
 	pinctrl-0 = <&pcie3x2_rst>;
-	/*reset-gpios = <0xf1 0x0f 0x00>;*/
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
-	status = "disabled";
-};
+	status = "okay";
+};*/
 
 &sata1 {
 	status = "okay";
@@ -702,11 +724,11 @@
 		};
 
 		usb20_pwren: usb20-pwren {
-			rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_output_high>;
+			rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 
 		usb30_pwren: usb30-pwren {
-			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_output_high>;
+			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 
@@ -1013,7 +1035,7 @@
 };
 
 &gmac1 {
-	status = "disabled";
+	status = "okay";
 	phy-mode = "rgmii";
 	clock_in_out = "output";
 	/*snps,reset-gpio = <0xe6 0x13 0x00>;*/
@@ -1096,7 +1118,7 @@
 };
 
 &mdio1 {
-	status = "disabled";
+	status = "okay";
 
 	yt9215_1: switch@1d {
 		compatible = "motorcomm,yt9215";

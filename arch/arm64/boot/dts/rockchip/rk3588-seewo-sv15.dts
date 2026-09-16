@@ -277,8 +277,8 @@
 };
 
 &hdmi0_in {
-	hdmi0_in_vp0: endpoint {
-		remote-endpoint = <&vp0_out_hdmi0>;
+	hdmi0_in_vp1: endpoint {
+		remote-endpoint = <&vp1_out_hdmi0>;
 	};
 };
 
@@ -294,8 +294,8 @@
 };
 
 &hdmi1_in {
-	hdmi1_in_vp1: endpoint {
-		remote-endpoint = <&vp1_out_hdmi1>;
+	hdmi1_in_vp0: endpoint {
+		remote-endpoint = <&vp0_out_hdmi1>;
 	};
 };
 
@@ -639,14 +639,16 @@
 };
 
 &pcie30phy {
-	data-lanes = <1 1 2 2>;
+	rockchip,pcie30-phymode = <0>;
 	status = "okay";
 };
 
 &pcie3x4 {
 	num-lanes = <2>;
-	max-link-speed = <3>;
-	pinctrl-names = "default";
+	/*ranges = <0x00000800 0x0 0xf0000000 0x0 0xf0000000 0x0 0x00100000>,
+		 <0x81000000 0x0 0xf0100000 0x0 0xf0100000 0x0 0x00100000>,
+		 <0x82000000 0x0 0xf0200000 0x0 0xf0200000 0x0 0x00e00000>,
+		 <0xc3000000 0x9 0x00000000 0x9 0x00000000 0x0 0x40000000>;*/
 	pinctrl-0 = <&pcie3x4_rst>;
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
@@ -655,8 +657,10 @@
 
 &pcie3x2 {
 	num-lanes = <2>;
-	max-link-speed = <3>;
-	pinctrl-names = "default";
+	/*ranges = <0x00000800 0x0 0xf1000000 0x0 0xf1000000 0x0 0x00100000>,
+		 <0x81000000 0x0 0xf1100000 0x0 0xf1100000 0x0 0x00100000>,
+		 <0x82000000 0x0 0xf1200000 0x0 0xf1200000 0x0 0x00e00000>,
+		 <0xc3000000 0x9 0x40000000 0x9 0x40000000 0x0 0x40000000>;*/
 	pinctrl-0 = <&pcie3x2_rst>;
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
@@ -822,6 +826,8 @@
 
 &u2phy0_otg {
 	vbus-supply = <&vcc5v0_otg>;
+	rockchip,typec-vbus-det;
+	rockchip,dis-u2-susphy;
 	status = "okay";
 };
 
@@ -926,16 +932,16 @@
 };
 
 &vp0 {
-	vp0_out_hdmi0: endpoint@ROCKCHIP_VOP2_EP_HDMI0 {
-		reg = <ROCKCHIP_VOP2_EP_HDMI0>;
-		remote-endpoint = <&hdmi0_in_vp0>;
+	vp0_out_hdmi1: endpoint@ROCKCHIP_VOP2_EP_HDMI1 {
+		reg = <ROCKCHIP_VOP2_EP_HDMI1>;
+		remote-endpoint = <&hdmi1_in_vp0>;
 	};
 };
 
 &vp1 {
-	vp1_out_hdmi1: endpoint@ROCKCHIP_VOP2_EP_HDMI1 {
-		reg = <ROCKCHIP_VOP2_EP_HDMI1>;
-		remote-endpoint = <&hdmi1_in_vp1>;
+	vp1_out_hdmi0: endpoint@ROCKCHIP_VOP2_EP_HDMI0 {
+		reg = <ROCKCHIP_VOP2_EP_HDMI0>;
+		remote-endpoint = <&hdmi0_in_vp1>;
 	};
 };
 
@@ -946,9 +952,9 @@
 	};
 };
 
-/*&wdt {
+&wdt {
 	status = "disabled";
-};*/
+};
 
 &spdif_tx5 {
 	status = "okay";

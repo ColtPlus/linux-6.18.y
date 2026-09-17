@@ -1037,7 +1037,7 @@
 };
 
 &gmac1 {
-	status = "okay";
+	status = "disabled";
 	phy-mode = "rgmii";
 	clock_in_out = "output";
 	/*snps,reset-gpio = <0xe6 0x13 0x00>;*/
@@ -1120,7 +1120,7 @@
 };
 
 &mdio1 {
-	status = "okay";
+	status = "disabled";
 
 	yt9215_1: switch@1d {
 		compatible = "motorcomm,yt9215";

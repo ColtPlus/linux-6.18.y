@@ -666,25 +666,25 @@
 };
 
 &pcie30phy {
-	data-lanes = <1 1 2 2>;
+	data-lanes = <1 1 1 1>;
 	status = "okay";
 };
 
 &pcie3x4 {
-	num-lanes = <2>;
+	num-lanes = <4>;
 	pinctrl-0 = <&pcie3x4_rst>;
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
 	status = "okay";
 };
 
-/*&pcie3x2 {
+&pcie3x2 {
 	num-lanes = <2>;
 	pinctrl-0 = <&pcie3x2_rst>;
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
-	status = "okay";
-};*/
+	status = "disabled";
+};
 
 &sata1 {
 	status = "okay";

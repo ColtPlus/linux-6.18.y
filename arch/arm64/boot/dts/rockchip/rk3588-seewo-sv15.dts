@@ -676,6 +676,7 @@
 	/*reset-gpios = <0xf1 0x0c 0x00>;*/
 	reset-gpios = <&gpio1 RK_PB4 GPIO_ACTIVE_HIGH>;
 	status = "okay";
+	local-mac-address = [D2 4B E6 AF CB 3C];
 };
 
 &pcie30phy {

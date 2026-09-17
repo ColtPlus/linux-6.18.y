@@ -180,6 +180,8 @@
 
 	vcc3v3_pcie30: regulator-vcc3v3-pcie30 {
 		compatible = "regulator-fixed";
+    		regulator-always-on;
+   		regulator-boot-on;
 		enable-active-high;
 		/*gpios = <0xf1 0x0e 0x00>;*/
 		gpios = <&gpio1 RK_PB6 GPIO_ACTIVE_HIGH>;

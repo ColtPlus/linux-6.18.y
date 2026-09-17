@@ -687,19 +687,19 @@
 	status = "okay";
 };
 
-/*fe150000:reset-gpios = <0xf1 0x07 0x00>*/
 &pcie3x4 {
 	num-lanes = <2>;
 	pinctrl-0 = <&pcie3x4_rst>;
+	/*reset-gpios = <0xf1 0x07 0x00>;*/
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
 	status = "okay";
 };
 
-/*fe160000:reset-gpios = <0xf1 0x0f 0x00>*/
 &pcie3x2 {
 	num-lanes = <2>;
 	pinctrl-0 = <&pcie3x2_rst>;
+	/*reset-gpios = <0xf1 0x0f 0x00>;*/
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
 	status = "okay";

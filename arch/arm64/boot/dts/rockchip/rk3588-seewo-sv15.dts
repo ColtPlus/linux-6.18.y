@@ -684,7 +684,7 @@
 	max-link-speed = <3>;
 	num-lanes = <2>;
 	rockchip,pipe-grf = <&php_grf>;
-	status = "disabled";
+	status = "okay";
 	pinctrl-0 = <&pcie3x2_rst>;
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;

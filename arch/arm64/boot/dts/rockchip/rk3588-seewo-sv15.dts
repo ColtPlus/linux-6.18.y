@@ -109,7 +109,6 @@
 		poll-interval = <100>;
 	};
 
-
 	pwm_fan1: pwm-fan1 {
 		compatible = "kdl-pwm-fan";
 		pwm-names = "fan1";
@@ -324,6 +323,7 @@
 &hdmi1_sound {
 	status = "okay";
 };
+
 &hdptxphy0 {
 	status = "okay";
 };
@@ -613,10 +613,6 @@
 		interrupts = <RK_PB5 IRQ_TYPE_LEVEL_LOW>;
 		status = "okay";
 	};
-};
-
-&i2s0_8ch {
-	status = "okay";
 };
 
 &i2s1_8ch {

@@ -686,6 +686,8 @@
 
 &pcie3x4 {
 	num-lanes = <2>;
+	max-link-speed = <2>;
+	pinctrl-names = "default";
 	pinctrl-0 = <&pcie3x4_rst>;
 	/*reset-gpios = <0xf1 0x07 0x00>;*/
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
@@ -696,6 +698,8 @@
 &pcie3x2 {
 	num-lanes = <2>;
 	pinctrl-0 = <&pcie3x2_rst>;
+	max-link-speed = <2>;
+	pinctrl-names = "default";
 	/*reset-gpios = <0xf1 0x0f 0x00>;*/
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
@@ -762,12 +766,12 @@
 			rockchip,pins = <1 RK_PB4 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 
-		pcie3x2_rst: pcie3x2-rst {
-			rockchip,pins = <1 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-
 		pcie3x4_rst: pcie3x4-rst {
 			rockchip,pins = <1 RK_PA7 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		pcie3x2_rst: pcie3x2-rst {
+			rockchip,pins = <1 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 };

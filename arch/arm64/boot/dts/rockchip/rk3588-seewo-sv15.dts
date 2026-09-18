@@ -129,7 +129,7 @@
 		pwm-polarity-inversed;
 	};
 
-	vcc12v_dcin: regulator-vcc12v-dcin {
+	vcc12v_dcin: vcc12v-dcin {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc12v_dcin";
 		regulator-always-on;
@@ -138,7 +138,7 @@
 		regulator-max-microvolt = <12000000>;
 	};
 
-	vcc5v0_sys: regulator-vcc5v0-sys {
+	vcc5v0_sys: vcc5v0-sys {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc5v0_sys";
 		regulator-always-on;
@@ -148,7 +148,7 @@
 		vin-supply = <&vcc12v_dcin>;
 	};
 
-	vcc_1v1_nldo_s3: regulator-vcc-1v1-nldo-s3 {
+	vcc_1v1_nldo_s3: vcc-1v1-nldo-s3 {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc_1v1_nldo_s3";
 		regulator-always-on;
@@ -158,7 +158,7 @@
 		vin-supply = <&vcc5v0_sys>;
 	};
 
-	pcie30_avdd0v75: regulator-pcie30-avdd0v75 {
+	pcie30_avdd0v75: pcie30-avdd0v75 {
 		compatible = "regulator-fixed";
 		regulator-name = "pcie30_avdd0v75";
 		regulator-boot-on;
@@ -168,7 +168,7 @@
 		vin-supply = <&vdd_0v75_s0>;
 	};
 
-	pcie30_avdd1v8: regulator-pcie30-avdd1v8 {
+	pcie30_avdd1v8: pcie30-avdd1v8 {
 		compatible = "regulator-fixed";
 		regulator-name = "pcie30_avdd1v8";
 		regulator-boot-on;
@@ -178,7 +178,7 @@
 		vin-supply = <&avcc_1v8_s0>;
 	};
 
-	vcc3v3_pcie30: regulator-vcc3v3-pcie30 {
+	vcc3v3_pcie30: vcc3v3-pcie30 {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc3v3_pcie30";
 		regulator-boot-on;
@@ -193,7 +193,7 @@
 		pinctrl-0 = <&vcc3v3_pcie30_en>;
 	};
 
-	vcc5v0_host: regulator-vcc5v0-host {
+	vcc5v0_host: vcc5v0-host-regulator {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc5v0_host";
 		regulator-boot-on;
@@ -207,7 +207,7 @@
 		pinctrl-0 = <&vcc5v0_host_en>;
 	};
 
-	vcc5v0_otg: regulator-vcc5v0-otg {
+	vcc5v0_otg: vcc5v0-otg-regulator {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc5v0_otg";
 		regulator-boot-on;
@@ -221,7 +221,18 @@
 		pinctrl-0 = <&vcc5v0_otg_en>;
 	};
 
-	usb20_pwr: regulator-usb20-pwr {
+	sys12v_pwr: sys12v-pwr {
+		compatible = "regulator-fixed";
+		regulator-name = "sys12v_pwr";
+		regulator-boot-on;
+		regulator-always-on;
+		enable-active-high;
+		gpio = <&gpio1 RK_PC7 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sys12v_pwren>;
+	};
+
+	usb20_pwr: usb20-pwr {
 		compatible = "regulator-fixed";
 		regulator-name = "usb20_pwr";
 		regulator-boot-on;
@@ -232,7 +243,7 @@
 		pinctrl-0 = <&usb20_pwren>;
 	};
 
-	usb30_pwr: regulator-usb30-pwr {
+	usb30_pwr: usb30-pwr {
 		compatible = "regulator-fixed";
 		regulator-name = "usb30_pwr";
 		regulator-boot-on;
@@ -271,17 +282,43 @@
 
 &cpu_l0 {
 	cpu-supply = <&vdd_cpu_lit_s0>;
-	mem-supply = <&vdd_cpu_lit_s0>;
+	mem-supply = <&vdd_cpu_lit_mem_s0>;
+};
+
+&cpu_l1 {
+	cpu-supply = <&vdd_cpu_lit_s0>;
+	mem-supply = <&vdd_cpu_lit_mem_s0>;
+};
+
+&cpu_l2 {
+	cpu-supply = <&vdd_cpu_lit_s0>;
+	mem-supply = <&vdd_cpu_lit_mem_s0>;
+};
+
+&cpu_l3 {
+	cpu-supply = <&vdd_cpu_lit_s0>;
+	mem-supply = <&vdd_cpu_lit_mem_s0>;
 };
 
 &cpu_b0 {
 	cpu-supply = <&vdd_cpu_big0_s0>;
-	mem-supply = <&vdd_cpu_big0_s0>;
+	mem-supply = <&vdd_cpu_big0_mem_s0>;
 };
+
+&cpu_b1 {
+	cpu-supply = <&vdd_cpu_big0_s0>;
+	mem-supply = <&vdd_cpu_big0_mem_s0>;
+};
+
 
 &cpu_b2 {
 	cpu-supply = <&vdd_cpu_big1_s0>;
-	mem-supply = <&vdd_cpu_big1_s0>;
+	mem-supply = <&vdd_cpu_big1_mem_s0>;
+};
+
+&cpu_b3 {
+	cpu-supply = <&vdd_cpu_big0_s0>;
+	mem-supply = <&vdd_cpu_big0_mem_s0>;
 };
 
 &gpu {
@@ -684,7 +721,7 @@
 	max-link-speed = <3>;
 	num-lanes = <2>;
 	rockchip,pipe-grf = <&php_grf>;
-	status = "okay";
+	status = "disabled";
 	pinctrl-0 = <&pcie3x2_rst>;
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;

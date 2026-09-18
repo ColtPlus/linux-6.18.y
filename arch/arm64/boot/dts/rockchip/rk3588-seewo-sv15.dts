@@ -317,8 +317,8 @@
 };
 
 &cpu_b3 {
-	cpu-supply = <&vdd_cpu_big0_s0>;
-	mem-supply = <&vdd_cpu_big0_mem_s0>;
+	cpu-supply = <&vdd_cpu_big1_s0>;
+	mem-supply = <&vdd_cpu_big1_mem_s0>;
 };
 
 &gpu {
@@ -384,7 +384,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&i2c0m2_xfer>;
 
-	vdd_cpu_big0_s0: rk8602@42 {
+	vdd_cpu_big0_s0: vdd_cpu_big0_mem_s0: rk8602@42 {
 		compatible = "rockchip,rk8602";
 		reg = <0x42>;
 		vin-supply = <&vcc5v0_sys>;
@@ -401,7 +401,7 @@
 		};
 	};
 
-	vdd_cpu_big1_s0: rk8603@43 {
+	vdd_cpu_big1_s0: vdd_cpu_big1_mem_s0: rk8603@43 {
 		compatible = "rockchip,rk8603", "rockchip,rk8602";
 		reg = <0x43>;
 		vin-supply = <&vcc5v0_sys>;

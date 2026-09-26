@@ -29,7 +29,7 @@
 		stdout-path = "serial2:1500000n8";
 	};
 
-	gpio_leds: gpio-leds {
+	/*gpio_leds: gpio-leds {
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
 
@@ -43,7 +43,7 @@
 			gpios = <&gpio4 RK_PD1 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "alarm";
 		};
-	};
+	};*/
 
 	dp1_sound: dp1-sound {
 		compatible = "simple-audio-card";
@@ -60,7 +60,7 @@
 		};
 	};
 
-	fiq_debugger: fiq-debugger {
+	/*fiq_debugger: fiq-debugger {
 		compatible = "rockchip,fiq-debugger";
 		rockchip,serial-id = <2>;
 		rockchip,wake-irq = <0>;
@@ -70,7 +70,7 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&uart2m0_xfer>;
 		status = "okay";
-	};
+	};*/
 
 	adc_keys: adc-keys {
 		compatible = "adc-keys";
@@ -232,6 +232,17 @@
 		pinctrl-0 = <&sys12v_pwren>;
 	};
 
+	sata_pwr: sata-pwr {
+		compatible = "regulator-fixed";
+		regulator-name = "sata_pwren";
+		regulator-boot-on;
+		regulator-always-on;
+		enable-active-high;
+		gpio = <&gpio1 RK_PD4 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sata_pwren>;
+	};
+
 	usb20_pwr: usb20-pwr {
 		compatible = "regulator-fixed";
 		regulator-name = "usb20_pwr";
@@ -253,6 +264,50 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&usb30_pwren>;
 	};
+
+	usb30_pwr: usb30-pwr {
+		compatible = "regulator-fixed";
+		regulator-name = "usb30_pwr";
+		regulator-boot-on;
+		regulator-always-on;
+		enable-active-high;
+		gpio = <&gpio1 RK_PC6 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&usb30_pwren>;
+	};
+
+	pse_pwr: pse-pwr {
+		compatible = "regulator-fixed";
+		regulator-name = "pse_pwr";
+		regulator-boot-on;
+		regulator-always-on;
+		enable-active-high;
+		gpio = <&gpio4 RK_PA0 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pse_pwren>;
+	};
+
+	tp_pwr: tp-pwr {
+		compatible = "regulator-fixed";
+		regulator-name = "tp_pwr";
+		regulator-boot-on;
+		regulator-always-on;
+		enable-active-high;
+		gpio = <&gpio1 RK_PC5 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&tp_pwren>;
+	};
+
+	sw20_sel: sw20-sel {
+		compatible = "regulator-fixed";
+		regulator-name = "sw20_sel";
+		regulator-boot-on;
+		regulator-always-on;
+		enable-active-high;
+		gpio = <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&sw20_sel_en>;
+	}
 
 	reserved_memory: reserved-memory {
 		#address-cells = <2>;
@@ -772,6 +827,18 @@
 		};
 	};
 
+	tp {
+		tp_pwren: tp-pwren {
+			rockchip,pins = <1 RK_PC5 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+
+	sw {
+		sw20_sel_en: sw20-sel-en {
+			rockchip,pins = <1 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+
 	sys12v {
 		sys12v_pwren: sys12v-pwren {
 			rockchip,pins = <1 RK_PC7 RK_FUNC_GPIO &pcfg_pull_none>;
@@ -877,7 +944,7 @@
 	status = "okay";
 };
 
-&uart6 {
+/*&uart6 {
 	status = "okay";
 };
 
@@ -887,7 +954,7 @@
 
 &uart8 {
 	status = "okay";
-};
+};*/
 
 &u2phy0 {
 	status = "okay";

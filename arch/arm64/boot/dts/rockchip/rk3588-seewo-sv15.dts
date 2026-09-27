@@ -279,7 +279,7 @@
 		gpio = <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&sw20_sel_en>;
-	}
+	};
 };
 
 &combphy0_ps {

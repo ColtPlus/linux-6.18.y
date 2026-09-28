@@ -239,17 +239,6 @@
 		pinctrl-0 = <&usb30_pwren>;
 	};
 
-	usb30_pwr: usb30-pwr {
-		compatible = "regulator-fixed";
-		regulator-name = "usb30_pwr";
-		regulator-boot-on;
-		regulator-always-on;
-		enable-active-high;
-		gpio = <&gpio1 RK_PC6 GPIO_ACTIVE_HIGH>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&usb30_pwren>;
-	};
-
 	pse_pwr: pse-pwr {
 		compatible = "regulator-fixed";
 		regulator-name = "pse_pwr";

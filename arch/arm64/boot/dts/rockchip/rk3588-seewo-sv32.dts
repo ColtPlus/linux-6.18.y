@@ -129,6 +129,7 @@
 		wifi_pwren: wifi-pwren {
 			rockchip,pins = <2 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
+	};
 };
 
 &combphy1_ps {

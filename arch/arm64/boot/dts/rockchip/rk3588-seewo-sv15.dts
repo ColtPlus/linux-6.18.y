@@ -27,7 +27,8 @@
 
 	chosen {
 		stdout-path = "serial2:1500000n8";
-	};
+	};
+
 
 	dp1_sound: dp1-sound {
 		compatible = "simple-audio-card";
@@ -42,7 +43,8 @@
 		simple-audio-card,codec {
 			sound-dai = <&dp1>;
 		};
-	};
+	};
+
 
 	adc_keys: adc-keys {
 		compatible = "adc-keys";
@@ -674,23 +676,19 @@
 };
 
 &pcie3x4 {
-	max-link-speed = <3>;
 	num-lanes = <2>;
-	rockchip,pipe-grf = <&php_grf>;
-	status = "disabled";
 	pinctrl-0 = <&pcie3x4_rst>;
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
+	status = "disabled";
 };
 
 &pcie3x2 {
-	max-link-speed = <3>;
 	num-lanes = <2>;
-	rockchip,pipe-grf = <&php_grf>;
-	status = "disabled";
 	pinctrl-0 = <&pcie3x2_rst>;
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
+	status = "disabled";
 };
 
 &sata1 {
@@ -854,7 +852,8 @@
 	pinctrl-0 = <&uart4m2_xfer>;
 	status = "okay";
 };
-
+
+
 &u2phy0 {
 	status = "okay";
 };

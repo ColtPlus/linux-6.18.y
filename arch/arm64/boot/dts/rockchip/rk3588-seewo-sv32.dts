@@ -44,17 +44,6 @@
 		pinctrl-0 = <&usb30_pwren_b>;
 	};
 
-	wifi_pwr: wifi-pwr {
-		compatible = "regulator-fixed";
-		regulator-name = "wifi_pwr";
-		regulator-boot-on;
-		regulator-always-on;
-		enable-active-high;
-		gpio = <&gpio2 RK_PB0 GPIO_ACTIVE_HIGH>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&wifi_pwren>;
-	};
-
 	acm8625m_sound: i2s0-sound {
 		compatible = "simple-audio-card";
 		simple-audio-card,format = "i2s";
@@ -122,12 +111,6 @@
 
 		usb30_pwren_b: usb30-pwren-b {
 			rockchip,pins = <1 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-	};
-
-	wifi {
-		wifi_pwren: wifi-pwren {
-			rockchip,pins = <2 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 };

@@ -34,7 +34,7 @@
 
 	usb30_pwr_b: usb30-pwr-a {
 		compatible = "regulator-fixed";
-		regulator-name = "usb30_pwr_a";
+		regulator-name = "usb30_pwr_b";
 		regulator-boot-on;
 		regulator-always-on;
 		enable-active-high;

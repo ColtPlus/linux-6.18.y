@@ -128,6 +128,12 @@
 		};
 	};
 
+	sata {
+		sata1_pm_reset: sata1-pm-reset {
+			rockchip,pins = <4 RK_PC4 RK_FUNC_GPIO &pcfg_output_high>;
+		};
+	};
+
 	wifi {
 		wifi_pwren: wifi-pwren {
 			rockchip,pins = <2 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;

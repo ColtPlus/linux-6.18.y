@@ -5,7 +5,7 @@
 
 /dts-v1/;
 
-#include "rk3588-seewo-sv15-sv32-sv50.dtsi"
+#include "rk3588-seewo-sv32-sv50.dtsi"
 
 / {
 	model = "Seewo SV32";
@@ -33,7 +33,7 @@
 		pinctrl-0 = <&usb30_pwren_a>;
 	};
 
-	usb30_pwr_b: usb30-pwr-a {
+	usb30_pwr_b: usb30-pwr-b {
 		compatible = "regulator-fixed";
 		regulator-name = "usb30_pwr_b";
 		regulator-boot-on;
@@ -113,9 +113,16 @@
 			rockchip,pins = <1 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
+
+	sata {
+		sata1_pm_reset: sata1-pm-reset {
+			rockchip,pins = <4 RK_PC4 RK_FUNC_GPIO &pcfg_output_high>;
+		};
+	};
 };
 
 &combphy1_ps {
+	pinctrl-names = "default";
 	pinctrl-0 = <&sata1_pm_reset>;
 };
 

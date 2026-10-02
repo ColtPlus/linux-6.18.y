@@ -32,7 +32,7 @@
 		pinctrl-0 = <&usb30_pwren_a>;
 	};
 
-	usb30_pwr_b: usb30-pwr-a {
+	usb30_pwr_b: usb30-pwr-b {
 		compatible = "regulator-fixed";
 		regulator-name = "usb30_pwr_b";
 		regulator-boot-on;

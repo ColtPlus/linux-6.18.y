@@ -84,11 +84,10 @@
 	};
 
 	pwm_fan1: pwm-fan1 {
-		compatible = "kdl-pwm-fan";
-		pwm-names = "fan1";
+		compatible = "pwm-fan";
+		cooling-levels = <0 120 150 180 210 240 255>;
 		pwms = <&pwm8 0 40000 0>;
-		pwm-frequency = <25000>;
-		/*rd-gpios = <0x130 0x00 0x00>;*/
+		#cooling-cells = <2>;
 		rd-gpios = <&gpio3 RK_PA0 GPIO_ACTIVE_HIGH>;
 		pwm-polarity-inversed;
 	};
@@ -98,7 +97,6 @@
 		pwm-names = "fan2";
 		pwms = <&pwm9 0 40000 0>;
 		pwm-frequency = <25000>;
-		/*rd-gpios = <0x130 0x01 0x00>;*/
 		rd-gpios = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
 		pwm-polarity-inversed;
 	};

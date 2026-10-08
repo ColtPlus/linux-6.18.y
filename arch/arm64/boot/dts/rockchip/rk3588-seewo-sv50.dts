@@ -141,6 +141,10 @@
 	};
 };
 
+&gmac1 {
+	status = "okay";
+};
+
 &mdio1 {
 	compatible = "snps,dwmac-mdio";
 	#address-cells = <1>;

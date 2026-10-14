@@ -93,41 +93,12 @@
 	};
 
 	pwm_fan2: pwm-fan2 {
-		compatible = "kdl-pwm-fan";
-		pwm-names = "fan2";
+		compatible = "pwm-fan";
+		cooling-levels = <0 120 150 180 210 240 255>;
 		pwms = <&pwm9 0 40000 0>;
-		pwm-frequency = <25000>;
+		#cooling-cells = <2>;
 		rd-gpios = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
 		pwm-polarity-inversed;
-	};
-
-	vcc12v_dcin: vcc12v-dcin {
-		compatible = "regulator-fixed";
-		regulator-name = "vcc12v_dcin";
-		regulator-always-on;
-		regulator-boot-on;
-		regulator-min-microvolt = <12000000>;
-		regulator-max-microvolt = <12000000>;
-	};
-
-	vcc5v0_sys: vcc5v0-sys {
-		compatible = "regulator-fixed";
-		regulator-name = "vcc5v0_sys";
-		regulator-always-on;
-		regulator-boot-on;
-		regulator-min-microvolt = <5000000>;
-		regulator-max-microvolt = <5000000>;
-		vin-supply = <&vcc12v_dcin>;
-	};
-
-	vcc_1v1_nldo_s3: vcc-1v1-nldo-s3 {
-		compatible = "regulator-fixed";
-		regulator-name = "vcc_1v1_nldo_s3";
-		regulator-always-on;
-		regulator-boot-on;
-		regulator-min-microvolt = <1100000>;
-		regulator-max-microvolt = <1100000>;
-		vin-supply = <&vcc5v0_sys>;
 	};
 
 	pcie30_avdd0v75: pcie30-avdd0v75 {
@@ -150,19 +121,34 @@
 		vin-supply = <&avcc_1v8_s0>;
 	};
 
+	vcc12v_dcin: vcc12v-dcin {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc12v_dcin";
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <12000000>;
+		regulator-max-microvolt = <12000000>;
+	};
+
 	vcc3v3_pcie30: vcc3v3-pcie30 {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc3v3_pcie30";
-		regulator-boot-on;
-		regulator-always-on;
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
-		vin-supply = <&vcc12v_dcin>;
 		enable-active-high;
 		gpios = <&gpio1 RK_PB6 GPIO_ACTIVE_HIGH>;
 		startup-delay-us = <7500>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&vcc3v3_pcie30_en>;
+		vin-supply = <&vcc12v_dcin>;
+	};
+
+	vcc5v0_sys: vcc5v0-sys {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc5v0_sys";
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		vin-supply = <&vcc12v_dcin>;
 	};
 
 	vcc5v0_host: vcc5v0-host-regulator {
@@ -172,9 +158,9 @@
 		regulator-always-on;
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
-		vin-supply = <&vcc5v0_sys>;
 		enable-active-high;
 		gpio = <&gpio4 RK_PB0 GPIO_ACTIVE_HIGH>;
+		vin-supply = <&vcc5v0_sys>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&vcc5v0_host_en>;
 	};
@@ -182,15 +168,23 @@
 	vcc5v0_otg: vcc5v0-otg-regulator {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc5v0_otg";
-		regulator-boot-on;
-		regulator-always-on;
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
-		vin-supply = <&vcc5v0_sys>;
 		enable-active-high;
 		gpio = <&gpio4 RK_PA3 GPIO_ACTIVE_HIGH>;
+		vin-supply = <&vcc5v0_sys>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&vcc5v0_otg_en>;
+	};
+
+	vcc_1v1_nldo_s3: vcc-1v1-nldo-s3 {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc_1v1_nldo_s3";
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <1100000>;
+		regulator-max-microvolt = <1100000>;
+		vin-supply = <&vcc5v0_sys>;
 	};
 
 	sys12v_pwr: sys12v-pwr {
@@ -650,11 +644,8 @@
 };
 
 &pcie2x1l2 {
-	local-mac-address = [D2 4B E6 AF CB 3C];
-	pinctrl-names = "default";
-	pinctrl-0 = <&pcie2_2_rst>;
-	reset-gpios = <&gpio1 RK_PB4 GPIO_ACTIVE_HIGH>;
 	status = "okay";
+	reset-gpios = <&gpio1 RK_PB4 GPIO_ACTIVE_HIGH>;
 };
 
 &pcie30phy {
@@ -664,18 +655,16 @@
 
 &pcie3x4 {
 	num-lanes = <2>;
-	pinctrl-0 = <&pcie3x4_rst>;
+	status = "okay";
 	reset-gpios = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
-	status = "disabled";
 };
 
 &pcie3x2 {
 	num-lanes = <2>;
-	pinctrl-0 = <&pcie3x2_rst>;
+	status = "okay";
 	reset-gpios = <&gpio1 RK_PB7 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie30>;
-	status = "disabled";
 };
 
 &sata1 {
@@ -943,6 +932,14 @@
 &usb_host2_xhci {
 	status = "okay";
 };
+
+&mmu600_pcie {
+	interrupts = <GIC_SPI 369 IRQ_TYPE_LEVEL_HIGH 0>,
+		     <GIC_SPI 371 IRQ_TYPE_LEVEL_HIGH 0>,
+		     <GIC_SPI 374 IRQ_TYPE_LEVEL_HIGH 0>,
+		     <GIC_SPI 367 IRQ_TYPE_LEVEL_HIGH 0>;
+};
+
 
 &vop {
 	status = "okay";

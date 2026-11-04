@@ -934,10 +934,7 @@
 };
 
 &mmu600_pcie {
-	interrupts = <GIC_SPI 369 IRQ_TYPE_LEVEL_HIGH 0>,
-		     <GIC_SPI 371 IRQ_TYPE_LEVEL_HIGH 0>,
-		     <GIC_SPI 374 IRQ_TYPE_LEVEL_HIGH 0>,
-		     <GIC_SPI 367 IRQ_TYPE_LEVEL_HIGH 0>;
+	status = "disabled";
 };
 
 

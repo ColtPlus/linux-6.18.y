@@ -200,7 +200,7 @@
 
 	sata_pwr: sata-pwr {
 		compatible = "regulator-fixed";
-		regulator-name = "sata_pwren";
+		regulator-name = "sata_pwr";
 		regulator-boot-on;
 		regulator-always-on;
 		enable-active-high;

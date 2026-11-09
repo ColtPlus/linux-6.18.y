@@ -234,8 +234,6 @@
 	pse_pwr: pse-pwr {
 		compatible = "regulator-fixed";
 		regulator-name = "pse_pwr";
-		regulator-boot-on;
-		regulator-always-on;
 		enable-active-high;
 		gpio = <&gpio4 RK_PA0 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
@@ -245,8 +243,6 @@
 	tp_pwr: tp-pwr {
 		compatible = "regulator-fixed";
 		regulator-name = "tp_pwr";
-		regulator-boot-on;
-		regulator-always-on;
 		enable-active-high;
 		gpio = <&gpio1 RK_PC5 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
@@ -256,12 +252,21 @@
 	sw20_sel: sw20-sel {
 		compatible = "regulator-fixed";
 		regulator-name = "sw20_sel";
-		regulator-boot-on;
-		regulator-always-on;
 		enable-active-high;
 		gpio = <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&sw20_sel_en>;
+	};
+
+	energy_saving: energy-saving {
+		compatible = "regulator-fixed";
+		regulator-name = "energy_saving";
+		regulator-boot-on;
+		regulator-always-on;
+		enable-active-high;
+		gpio = <&gpio4 RK_PD5 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&energy_saving_en>;
 	};
 };
 
@@ -721,6 +726,12 @@
 	sw {
 		sw20_sel_en: sw20-sel-en {
 			rockchip,pins = <1 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+
+	energy_saving {
+		energy_saving_en: energy-saving-en {
+			rockchip,pins = <4 RK_PD5 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 

@@ -190,8 +190,6 @@
 	sys12v_pwr: sys12v-pwr {
 		compatible = "regulator-fixed";
 		regulator-name = "sys12v_pwr";
-		regulator-boot-on;
-		regulator-always-on;
 		enable-active-high;
 		gpio = <&gpio1 RK_PC7 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
@@ -201,8 +199,6 @@
 	sata_pwr: sata-pwr {
 		compatible = "regulator-fixed";
 		regulator-name = "sata_pwr";
-		regulator-boot-on;
-		regulator-always-on;
 		enable-active-high;
 		gpio = <&gpio1 RK_PD4 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
@@ -212,8 +208,6 @@
 	usb20_pwr: usb20-pwr {
 		compatible = "regulator-fixed";
 		regulator-name = "usb20_pwr";
-		regulator-boot-on;
-		regulator-always-on;
 		enable-active-high;
 		gpio = <&gpio1 RK_PC2 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
@@ -223,8 +217,6 @@
 	usb30_pwr: usb30-pwr {
 		compatible = "regulator-fixed";
 		regulator-name = "usb30_pwr";
-		regulator-boot-on;
-		regulator-always-on;
 		enable-active-high;
 		gpio = <&gpio1 RK_PC6 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
@@ -261,8 +253,6 @@
 	energy_saving: energy-saving {
 		compatible = "regulator-fixed";
 		regulator-name = "energy_saving";
-		regulator-boot-on;
-		regulator-always-on;
 		enable-active-high;
 		gpio = <&gpio4 RK_PD5 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
